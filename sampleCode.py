@@ -1,3 +1,4 @@
+import os as paras
 # This is a sample comment
 class Example:
     """Example class docstring."""
@@ -13,3 +14,7 @@ class Example:
 def greet(name):
     """Greet a user by name."""
     return f"Hello, {name}!"
+
+if __name__ == "__main__":
+    addition = Example(1)
+    print(addition.add(10))

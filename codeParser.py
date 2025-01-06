@@ -12,11 +12,37 @@ class CodeParser(ast.NodeVisitor):
 
     def visit_FunctionDef(self, node):
         docstring = ast.get_docstring(node)
+        returnAnnotation = None
+
+        # Analyze return type annotations
+        if node.returns:
+            try:
+                returnAnnotation = ast.unparse(node.returns)  # For explicit annotations
+            except AttributeError:
+                returnAnnotation = getattr(node.returns, "id", None)
+
+        # Infer return type by analyzing return statements
+        if not returnAnnotation:
+            inferred_return_types = set()
+            for body_node in node.body:
+                if isinstance(body_node, ast.Return):
+                    if isinstance(body_node.value, ast.Constant):
+                        inferred_return_types.add(type(body_node.value.value).__name__)
+                    elif isinstance(body_node.value, ast.Name):
+                        inferred_return_types.add("variable")
+                    elif isinstance(body_node.value, ast.Call):
+                        inferred_return_types.add("function_call")
+                    else:
+                        inferred_return_types.add("unknown")
+
+            if inferred_return_types:
+                returnAnnotation = ", ".join(inferred_return_types)
+                
         function_info = {
             "name": node.name,
             "docstring": docstring,
             "args": [arg.arg for arg in node.args.args],
-            "returns": getattr(node.returns, "id", None) if node.returns else None
+            "returns": returnAnnotation
         }
         self.functions.append(function_info)
         self.generic_visit(node)
@@ -65,7 +91,7 @@ class CodeParser(ast.NodeVisitor):
 
             if stripped.startswith("#"):
                 self.comments.append(stripped)
-            elif stripped.startswith('"""') or stripped.startswith("'''"):
+            elif stripped.startswith('"""'):
                 if is_multiline:
                     multiline_buffer.append(stripped)
                     self.comments.append("\n".join(multiline_buffer))
@@ -74,6 +100,9 @@ class CodeParser(ast.NodeVisitor):
                 else:
                     is_multiline = True
                     multiline_buffer.append(stripped)
+            elif stripped.startswith('"""') and stripped.endswith("'''"):
+                if not is_multiline:
+                    self.comments.append(stripped)
             elif is_multiline:
                 multiline_buffer.append(stripped)
 

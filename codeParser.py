@@ -41,4 +41,60 @@ class CodeParser(ast.NodeVisitor):
         self.classes.append(class_info)
         self.generic_visit(node)
 
+    def visit_Import(self, node):
+        for alias in node.names:
+            self.imports.append({"module": alias.name, "alias": alias.asname})
 
+    def visit_ImportFrom(self, node):
+        for alias in node.names:
+            self.imports.append({"module": node.module, "alias": alias.name})
+
+    def visit_Assign(self, node):
+        for target in node.targets:
+            if isinstance(target, ast.Name):
+                self.variables.append({"name": target.id, "value": ast.dump(node.value)})
+        self.generic_visit(node)
+
+    def parse_comments(self, code):
+        lines = code.splitlines()
+        is_multiline = False
+        multiline_buffer = []
+
+        for line in lines:
+            stripped = line.strip()
+
+            if stripped.startswith("#"):
+                self.comments.append(stripped)
+            elif stripped.startswith('"""') or stripped.startswith("'''"):
+                if is_multiline:
+                    multiline_buffer.append(stripped)
+                    self.comments.append("\n".join(multiline_buffer))
+                    multiline_buffer = []
+                    is_multiline = False
+                else:
+                    is_multiline = True
+                    multiline_buffer.append(stripped)
+            elif is_multiline:
+                multiline_buffer.append(stripped)
+
+    def parse(self, code):
+        self.code = code.splitlines()
+        try:
+            tree = ast.parse(code)
+            self.visit(tree)
+        except SyntaxError as e:
+            print(f"SyntaxError in parsing: {e}")
+        self.parse_comments(code)
+
+if __name__ == "__main__":
+    with open("sampleCode.py", "r") as file:
+        sampleCode = file.read()
+
+    parser = CodeParser()
+    parser.parse(sampleCode)
+    print("Functions:", parser.functions)
+    print("Classes:", parser.classes)
+    print("Imports:", parser.imports)
+    print("Variables:", parser.variables)
+    print("Comments:", parser.comments)
+    print("Docstrings:", parser.docstrings)

@@ -15,8 +15,8 @@ class CodeParserLLM:
         """
         Parse the provided code (and language, if specified) using the Hugging Face model to extract features.
         """
-        # Tokenize the input code
-        inputs = self.tokenizer(code, return_tensors="pt", truncation=True, max_length=1024)
+        # Tokenize the input code (max_length set to 512)
+        inputs = self.tokenizer(code, return_tensors="pt", truncation=True, padding="max_length", max_length=512)
 
         # Generate the LLM response (prediction)
         outputs = self.model(**inputs)
@@ -223,13 +223,15 @@ class CodeParserLLM:
         """Return extracted features."""
         return self.features
 
+
 if __name__ == "__main__":
-    with open("sampleCode.java", "r") as file:
+    with open("sampleCode.py", "r") as file:
         sample_code = file.read()
 
     parser = CodeParserLLM()
-    parser.parse_code(sample_code, language="java")
+    parser.parse_code(sample_code, language="python")
     features = parser.get_features()
 
-    # Print the extracted features in a readable JSON format
-    print(json.dumps(features, indent=4))
+    # Save the extracted features in a readable JSON format to a file
+    with open("sampleCodeFeatures.txt", "w") as output_file:
+        output_file.write(json.dumps(features, indent=4))

@@ -1,43 +1,77 @@
 import streamlit as st
 import json
-from codeParser import CodeParser  # Assuming your parser is saved in `code_parser.py`
+from llmParser import CodeParserLLM  # Assuming the code is saved in `code_parser_llm.py`
 
+def visualize_parsed_features(code, language):
+    """
+    Parse the code using CodeParserLLM and visualize the extracted features.
+    """
+    # Initialize the parser
+    parser = CodeParserLLM()
+    parser.parse_code(code, language)
 
-def parse_and_display_code(fileContent):
-    # Parse code
-    parser = CodeParser()
-    parser.parse(fileContent)
+    # Get extracted features
+    features = parser.get_features()
 
-    # Display parsed data
+    # Display the features
     st.header("Parsed Code Features")
 
-    # Display Functions
-    with st.expander("Functions"):
-        st.json(parser.functions)
-
-    # Display Classes
-    with st.expander("Classes"):
-        st.json(parser.classes)
+    # Display language
+    st.subheader("Programming Language")
+    st.write(features.get("language", "Unknown"))
 
     # Display Variables
     with st.expander("Variables"):
-        st.json(parser.variables)
+        st.json(features.get("variables", []))
+
+    # Display Data Types
+    with st.expander("Data Types"):
+        st.json(features.get("data_types", []))
+
+    # Display Functions
+    with st.expander("Functions"):
+        st.json(features.get("functions", []))
+
+    # Display Classes
+    with st.expander("Classes"):
+        st.json(features.get("classes", []))
 
     # Display Imports
     with st.expander("Imports"):
-        st.json(parser.imports)
+        st.json(features.get("imports", []))
 
     # Display Comments
     with st.expander("Comments"):
-        st.json(parser.comments)
+        st.json(features.get("comments", {}))
 
+    # Display Operators
+    with st.expander("Operators"):
+        st.json(features.get("operators", []))
+
+    # Display Control Structures
+    with st.expander("Control Structures"):
+        st.json(features.get("control_structures", []))
+
+    # Display Multithreading
+    with st.expander("Multithreading"):
+        st.json(features.get("multithreading", []))
+
+    # Display LLM Analysis
+    with st.expander("LLM Analysis"):
+        st.write(features.get("llm_analysis", "No insights available."))
 
 # Streamlit App
-st.title("Code Parsing Dashboard")
+st.title("Code Analysis Dashboard")
 
 # File Upload
-uploaded_file = st.file_uploader("Upload a code file", type=["py", "js", "java", "cpp", "cs"])
+uploaded_file = st.file_uploader("Upload a code file", type=["py", "java", "cpp", "js"])
 if uploaded_file is not None:
-    file_content = uploaded_file.read().decode("utf-8")
-    st.text_area("Uploaded Code", file_content, height=300)
-    parse_and_display_code(file_content)
+    # Read file content
+    code = uploaded_file.read().decode("utf-8")
+    st.text_area("Uploaded Code", code, height=300)
+
+    # Select programming language
+    language = st.selectbox("Select the programming language", ["python", "java", "cpp", "js", "r", "html", "css", "nodejs", "react", "rust"])
+
+    # Visualize parsed features
+    visualize_parsed_features(code, language)

@@ -1,0 +1,182 @@
+{
+    "program": "Arithmetic and Advanced Arithmetic Operations",
+    "features": {
+        "Classes": [
+            {
+                "name": "ArithmeticOperations",
+                "description": "Describe the purpose of the class named 'ArithmeticOperations' in a Python program.",
+                "methods": [
+                    {
+                        "name": "__init__",
+                        "description": "Describe the purpose of the method named '__init__' in a Python program."
+                    },
+                    {
+                        "name": "add",
+                        "description": "Describe the purpose of the method named 'add' in a Python program."
+                    },
+                    {
+                        "name": "subtract",
+                        "description": "Describe the purpose of the method named'subtract' in a Python program."
+                    },
+                    {
+                        "name": "multiply",
+                        "description": "Describe the purpose of the method named'multiply' in a Python program."
+                    },
+                    {
+                        "name": "divide",
+                        "description": "Describe the purpose of the method named 'divide' in a Python program."
+                    },
+                    {
+                        "name": "modulus",
+                        "description": "Describe the purpose of the method named'modulus' in a Python program."
+                    },
+                    {
+                        "name": "power",
+                        "description": "Describe the purpose of the method named 'power' in a Python program."
+                    },
+                    {
+                        "name": "square_root",
+                        "description": "Describe the purpose of the method named'square_root' in a Python program."
+                    }
+                ]
+            },
+            {
+                "name": "AdvancedArithmeticOperations",
+                "description": "Describe the purpose of the class named 'AdvancedArithmeticOperations' in a Python program.",
+                "methods": [
+                    {
+                        "name": "__init__",
+                        "description": "Describe the purpose of the method named '__init__' in a Python program."
+                    },
+                    {
+                        "name": "factorial",
+                        "description": "Describe the purpose of the method named 'factorial' in a Python program."
+                    },
+                    {
+                        "name": "log",
+                        "description": "Describe the purpose of the method named 'log' in a Python program."
+                    },
+                    {
+                        "name": "exp",
+                        "description": "Describe the purpose of the method named 'exp' in a Python program."
+                    },
+                    {
+                        "name": "sin",
+                        "description": "Describe the purpose of the method named'sin' in a Python program."
+                    },
+                    {
+                        "name": "cos",
+                        "description": "Describe the purpose of the method named 'cos' in a Python program."
+                    }
+                ]
+            }
+        ],
+        "Functions": [
+            {
+                "name": "__init__",
+                "description": "Describe the purpose of the function named '__init__' in a Python program."
+            },
+            {
+                "name": "add",
+                "description": "Describe the purpose of the function named 'add' in a Python program."
+            },
+            {
+                "name": "subtract",
+                "description": "Describe the purpose of the function named'subtract' in a Python program."
+            },
+            {
+                "name": "multiply",
+                "description": "Describe the purpose of the function named'multiply' in a Python program."
+            },
+            {
+                "name": "divide",
+                "description": "Describe the purpose of the function named 'divide' in a Python program."
+            },
+            {
+                "name": "modulus",
+                "description": "Describe the purpose of the function named'modulus' in a Python program."
+            },
+            {
+                "name": "power",
+                "description": "Describe the purpose of the function named 'power' in a Python program."
+            },
+            {
+                "name": "square_root",
+                "description": "Describe the purpose of the function named'square_root' in a Python program."
+            },
+            {
+                "name": "menu",
+                "description": "Describe the purpose of the function named'menu' in a Python program."
+            },
+            {
+                "name": "get_input",
+                "description": "Describe the purpose of the function named 'get_input' in a Python program."
+            },
+            {
+                "name": "perform_operation",
+                "description": "Describe the purpose of the function named 'perform_operation' in a Python program."
+            },
+            {
+                "name": "main",
+                "description": "Describe the purpose of the function named'main' in a Python program."
+            },
+            {
+                "name": "__init__",
+                "description": "Describe the purpose of the function named '__init__' in a Python program."
+            },
+            {
+                "name": "factorial",
+                "description": "Describe the purpose of the function named 'factorial' in a Python program."
+            },
+            {
+                "name": "log",
+                "description": "Describe the purpose of the function named 'log' in a Python program."
+            },
+            {
+                "name": "exp",
+                "description": "Describe the purpose of the function named 'exp' in a Python program."
+            },
+            {
+                "name": "sin",
+                "description": "Describe the purpose of the function named'sin' in a Python program."
+            },
+            {
+                "name": "cos",
+                "description": "Describe the purpose of the function named 'cos' in a Python program."
+            },
+            {
+                "name": "advanced_menu",
+                "description": "Describe the purpose of the function named 'advanced_menu' in a Python program."
+            },
+            {
+                "name": "get_advanced_input",
+                "description": "Describe the purpose of the function named 'get_advanced_input' in a Python program."
+            },
+            {
+                "name": "perform_advanced_operation",
+                "description": "Describe the purpose of the function named 'perform_advanced_operation' in a Python program."
+            },
+            {
+                "name": "advanced_operations",
+                "description": "Describe the purpose of the function named 'advanced_operations' in a Python program."
+            },
+            {
+                "name": "extended_program",
+                "description": "Describe the purpose of the function named 'extended_program' in a Python program."
+            }
+        ],
+        "Error Handling": [],
+        "Input Handling": [],
+        "User Interaction": [],
+        "Program Flow": [],
+        "Mathematical Operations": []
+    },
+    "variables": {
+        "choice": "Unknown",
+        "num1": "Unknown",
+        "num2": "Unknown",
+        "arithmetic": "Unknown",
+        "adv_arithmetic": "Unknown",
+        "user_choice": "Unknown"
+    }
+}

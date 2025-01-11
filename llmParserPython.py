@@ -33,8 +33,10 @@ class CodeFeatureExtractor(ast.NodeVisitor):
     def visit_Assign(self, node):
         for target in node.targets:
             if isinstance(target, ast.Name):
-                # Attempt to infer data type from the value
-                data_type = type(ast.literal_eval(node.value)) if isinstance(node.value, ast.Constant) else "Unknown"
+                if isinstance(node.value, ast.Constant):
+                    data_type = type(ast.literal_eval(node.value))
+                else:
+                    data_type = "Unknown"
                 self.variable_types[target.id] = str(data_type)
         self.generic_visit(node)
 
@@ -79,25 +81,11 @@ class CodeAnalysis:
         return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 if __name__ == "__main__":
-    sample_code = """
-class ArithmeticOperations:
-    def add(self, num1, num2):
-        return num1 + num2
-
-    def subtract(self, num1, num2):
-        return num1 - num2
-
-    def divide(self, num1, num2):
-        if num2 == 0:
-            raise ValueError("Cannot divide by zero")
-        return num1 / num2
-
-def menu():
-    print("1. Addition")
-    print("2. Subtraction")
-    print("3. Division")
-    """
+    with open("sampleCode.py", "r") as file:
+        sample_code = file.read()
 
     analyzer = CodeAnalysis()
     result = analyzer.analyze_code(sample_code)
     print(json.dumps(result, indent=4))
+    with open("sampleAnalysis.json", "w") as file:
+        json.dump(result, file, indent=4)

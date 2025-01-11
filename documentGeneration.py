@@ -1,5 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
+
 class CodeDocumentationGeneratorT5:
     def __init__(self, features):
         self.features = features
@@ -16,38 +17,37 @@ class CodeDocumentationGeneratorT5:
     def generate_overview(self):
         """Generate an overview section."""
         language = self.features.get("language", "Unknown")
-        prompt = f"Describe the programming language {language} and its use cases."
+        program_name = self.features.get("program", "Unknown Program")
+        prompt = f"Describe the programming language {language} and its use cases for a program named {program_name}."
         t5_response = self._generate_t5_text(prompt)
-        return f"### Overview\n\nThis code is written in **{language}**.\n\n{t5_response}\n"
+        return f"### Overview\n\nThis code is written in **{language}** for a program named **{program_name}**.\n\n{t5_response}\n"
 
     def generate_variables_doc(self):
         """Generate documentation for variables."""
         variables = self.features.get("variables", [])
-        if not variables:
+        if not variables or not isinstance(variables, dict):
             return "### Variables\n\nNo variables were detected in the code.\n"
 
         docs = ["### Variables\n"]
-        for var in variables:
+        for var_name, var_type in variables.items():
             prompt = (
-                f"Describe the variable `{var['name']}` of type `{var['type']}` "
+                f"Describe the variable `{var_name}` of type `{var_type}` "
                 f"and its potential role in the program."
             )
             t5_response = self._generate_t5_text(prompt)
-            docs.append(f"- **{var['name']}**: {t5_response.strip()}")
+            docs.append(f"- **{var_name}**: {t5_response.strip()}")
         return "\n".join(docs) + "\n"
 
     def generate_functions_doc(self):
         """Generate documentation for functions."""
-        functions = self.features.get("functions", [])
+        functions = self.features.get("Functions", [])
         if not functions:
             return "### Functions\n\nNo functions were detected in the code.\n"
 
         docs = ["### Functions\n"]
         for func in functions:
-            args = ", ".join(func['args']) if func['args'] else "No arguments"
             prompt = (
-                f"Describe the function `{func['name']}` with arguments `{args}` "
-                f"and its purpose in the program."
+                f"{func.get('description', f'Describe the purpose of the function `{func.get("name", "Unknown")}` in the program.')}"
             )
             t5_response = self._generate_t5_text(prompt)
             docs.append(f"- **{func['name']}**: {t5_response.strip()}")
@@ -55,19 +55,25 @@ class CodeDocumentationGeneratorT5:
 
     def generate_classes_doc(self):
         """Generate documentation for classes."""
-        classes = self.features.get("classes", [])
+        classes = self.features.get("Classes", [])
         if not classes:
             return "### Classes\n\nNo classes were detected in the code.\n"
 
         docs = ["### Classes\n"]
         for cls in classes:
-            bases = ", ".join(cls['base_classes']) if cls['base_classes'] else "No base classes"
-            prompt = (
-                f"Describe the class `{cls['name']}` with base classes `{bases}`. "
-                f"Explain its purpose in object-oriented programming."
-            )
-            t5_response = self._generate_t5_text(prompt)
-            docs.append(f"- **{cls['name']}**: {t5_response.strip()}")
+            class_description = cls.get("description",
+                                        f"Describe the purpose of the class `{cls.get('name', 'Unknown')}`.")
+            prompt = f"{class_description}"
+            t5_response_class = self._generate_t5_text(prompt)
+            methods_docs = []
+            for method in cls.get("methods", []):
+                method_description = method.get("description",
+                                                f"Describe the method `{method.get('name', 'Unknown')}`.")
+                method_prompt = f"{method_description}"
+                t5_response_method = self._generate_t5_text(method_prompt)
+                methods_docs.append(f"  - **{method['name']}**: {t5_response_method.strip()}")
+
+            docs.append(f"- **{cls['name']}**: {t5_response_class.strip()}\n" + "\n".join(methods_docs))
         return "\n".join(docs) + "\n"
 
     def generate_full_documentation(self):
@@ -86,7 +92,7 @@ if __name__ == "__main__":
     # Sample feature set
     import json
 
-    with open("sampleCodeFeatures.txt", "r") as file:
+    with open("sampleAnalysis.json", "r") as file:
         sample_features = json.load(file)
 
     # Initialize T5-enhanced documentation generator

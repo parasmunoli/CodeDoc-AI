@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
     print("Generating detailed documentation...")
     # Generate a detailed documentation markdown file
-    with open("detailedDocumentation.md", "w") as doc_file:
+    with open("sampleBasicDocumentation.md", "w") as doc_file:
         doc_file.write(f"# Program Name: {result['program']}\n\n")
         doc_file.write("## Extracted Features and Documentation\n\n")
 

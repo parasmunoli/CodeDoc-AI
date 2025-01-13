@@ -19,7 +19,7 @@ CodeDoc-AI is an AI-driven tool designed to automate the generation of comprehen
 ### Prerequisites
 
 - Python 3.12 or higher
-- Required Python packages (listed in `requirements.txt` with version specified.)
+- Required Python packages (listed in `requirements.txt` with version specified)
 
 ### Installation
 

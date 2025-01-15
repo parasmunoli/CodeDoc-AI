@@ -47,15 +47,17 @@ def extract_features_from_code(code: str) -> dict:
 if __name__ == "__main__":
     try:
         # Replace this with the path to your input code file
-        with open("Login.jsx", "r") as file:
+        with open("sampleCode.py", "r") as file:
             example_code = file.read()
 
         # Extract features using the MetaAI model
         features = extract_features_from_code(example_code)
 
         # Save the extracted features to a JSON file
+        print("Dumping features...")
         with open("updatedSampleAnalysis.json", "w") as json_file:
             json.dump(features, json_file)
+        print("Done.")
         
         print("Feature extraction completed. Results saved to 'updatedSampleAnalysis.json'.")
     except FileNotFoundError as e:

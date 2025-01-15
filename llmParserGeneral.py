@@ -23,21 +23,21 @@ def extractFeaturesFromCode(code: str) -> dict:
         # Define a structured prompt for the model
         prompt = (
             f"Analyze the following code and extract all meaningful features based on the respective programming language's features and naming conventions. "
-            f"Provide details and their purposes in a JSON format, adhering to the programming language's structure and terminology.\n\nCode:\n{code}"
+            f"respond only in json format Provide details and their purposes in a JSON format, adhering to the programming language's structure and terminology.\n\nCode:\n{code}"
         )
 
         # Query the model with the prompt
         print("Querying MetaAI model...")
         response = model.prompt(prompt)
         print("Model response received.")
-        print(response)
+        # print(response)
         # Parse the response to JSON
         try:
             response_message = response.get('message', '')
             features = json.loads(response_message.split('JSON format:\n', 1)[-1])
         except (json.JSONDecodeError, KeyError, IndexError) as parse_error:
             raise RuntimeError(f"Error parsing response to JSON: {str(parse_error)}")
-        
+        print(features)
         return features
     except Exception as e:
         raise RuntimeError(f"Error extracting features from code: {str(e)}")
@@ -55,8 +55,8 @@ if __name__ == "__main__":
 
         # Save the extracted features to a JSON file
         print("Dumping features...")
-        with open("updatedSampleAnalysis.json", "w") as json_file:
-            json.dump(features, json_file)
+        # with open("updatedSampleAnalysis.json", "w") as json_file:
+        #     json.dump(features, json_file)
         print("Done.")
         
         print("Feature extraction completed. Results saved to 'updatedSampleAnalysis.json'.")

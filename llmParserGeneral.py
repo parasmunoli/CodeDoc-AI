@@ -9,7 +9,7 @@ except Exception as e:
     raise RuntimeError(f"Error loading MetaAI model: {str(e)}")
 
 
-def extract_features_from_code(code: str) -> dict:
+def extractFeaturesFromCode(code: str) -> dict:
     """
     Extract meaningful features from programming language code using the MetaAI LLM.
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
             example_code = file.read()
 
         # Extract features using the MetaAI model
-        features = extract_features_from_code(example_code)
+        features = extractFeaturesFromCode(example_code)
 
         # Save the extracted features to a JSON file
         print("Dumping features...")

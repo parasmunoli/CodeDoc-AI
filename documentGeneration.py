@@ -20,7 +20,7 @@ class CodeDocumentationGenerator:
         """Generate full documentation using features."""
         prompt = (
             f"Generate a detailed elaborated description for code with the following features: {self.features}. "
-            "Include sections for overview, variables, functions, and classes, and provide in-depth explanations and response in HTML format providing entire code documentation in html format."
+            "output in html format Include sections for overview, variables, functions, and classes, and provide in-depth explanations and also add Conclusion of the code at last and response only in HTML format ."
         )
         response = self.generate_text(prompt)
         # markdownContent = self.text_generator.prompt(f"Arrange in markdown format: {response}")
@@ -50,8 +50,8 @@ if __name__ == "__main__":
     documentation = generator.convertToMarkdown(documentation.get('message', ''))
     print("Documentation converted to markdown successfully!")
 
-
-    with open("codeDocumentation.md", "w") as file:
-        file.write(documentation)
+    #
+    # with open("codeDocumentation.md", "w") as file:
+    #     file.write(documentation)
 
     print("Documentation saved as codeDocumentation.md!")

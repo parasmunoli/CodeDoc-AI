@@ -1,4 +1,8 @@
+from markdownify import markdownify
 from meta_ai_api import MetaAI
+
+
+# from transformers import MarkupLMFeatureExtractor, MarkupLMTokenizerFast, MarkupLMProcessor
 
 
 class CodeDocumentationGenerator:
@@ -8,7 +12,7 @@ class CodeDocumentationGenerator:
         self.text_generator = MetaAI()
         print("MetaAI text generator initialized successfully!")
 
-    def _generate_text(self, prompt):
+    def generate_text(self, prompt):
         """Generate text using MetaAI text generator."""
         return self.text_generator.prompt(prompt)
 
@@ -16,12 +20,17 @@ class CodeDocumentationGenerator:
         """Generate full documentation using features."""
         prompt = (
             f"Generate a detailed elaborated description for code with the following features: {self.features}. "
-            "Include sections for overview, variables, functions, and classes, and provide in-depth explanations and response in markdown format providing entire code documentation."
+            "Include sections for overview, variables, functions, and classes, and provide in-depth explanations and response in HTML format providing entire code documentation in html format."
         )
-        responce = self._generate_text(prompt)
-        # markdownContent = self.text_generator.prompt(f"Arrange in markdown format: {responce}")
+        response = self.generate_text(prompt)
+        # markdownContent = self.text_generator.prompt(f"Arrange in markdown format: {response}")
         # print(markdownContent)
-        return responce
+        return response
+
+    def convertToMarkdown(self, text):
+        markdownCode = markdownify(text)
+        print("Markdown Code: ", markdownCode)
+        return markdownCode
 
 
 # Example Usage
@@ -37,6 +46,10 @@ if __name__ == "__main__":
     documentation = generator.generate_full_documentation()
     print("Documentation generated successfully!")
     print("Documentation:",documentation.get('message', ''))
+    print("Converting to markdown...")
+    documentation = generator.convertToMarkdown(documentation.get('message', ''))
+    print("Documentation converted to markdown successfully!")
+
 
     with open("codeDocumentation.md", "w") as file:
         file.write(documentation)

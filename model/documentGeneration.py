@@ -8,9 +8,9 @@ from meta_ai_api import MetaAI
 class CodeDocumentationGenerator:
     def __init__(self):
         # self.features = features
-        print("Initializing MetaAI text generator...")
+        print("Initializing AI text generator...")
         self.text_generator = MetaAI()
-        print("MetaAI text generator initialized successfully!")
+        print("AI text generator initialized successfully!")
 
     def generate_full_documentation(self, link):
         """Generate full documentation using features."""
@@ -64,27 +64,3 @@ Return the response in HTML format only. Ensure the response is detailed and com
     def convertToMarkdown(self, text):
         markdownCode = markdownify(text)
         return markdownCode
-
-
-# Example Usage
-# if __name__ == "__main__":
-#     import json
-#
-#     with open("updatedSampleAnalysis.json", "r") as file:
-#         sample_features = json.load(file)
-#
-#     print("Generating documentation...")
-#     generator = CodeDocumentationGenerator(sample_features)
-#     print("Documentation generator initialized successfully!")
-#     documentation = generator.generate_full_documentation()
-#     print("Documentation generated successfully!")
-#     print("Documentation:",documentation.get('message', ''))
-#     print("Converting to markdown...")
-#     documentation = generator.convertToMarkdown(documentation.get('message', ''))
-#     print("Documentation converted to markdown successfully!")
-#
-#     #
-#     # with open("codeDocumentation.md", "w") as file:
-#     #     file.write(documentation)
-
-    print("Documentation saved as codeDocumentation.md!")

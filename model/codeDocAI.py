@@ -21,8 +21,6 @@ def generateDocumentation():
             return jsonify({"error": "No githubLink provided in the request"}), 400
 
         githubLink = request.json['githubLink']
-
-        # features = extractFeaturesFromCode(code)
         generator = CodeDocumentationGenerator()
         documentation = generator.generate_full_documentation(githubLink)
         markdown_doc = generator.convertToMarkdown(documentation.get('message', ''))

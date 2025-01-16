@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
 from documentGeneration import CodeDocumentationGenerator
-# from llmParserGeneral import extractFeaturesFromCode
 
 app = Flask(__name__)
 CORS(app)
@@ -24,7 +22,7 @@ def generateDocumentation():
         generator = CodeDocumentationGenerator()
         documentation = generator.generate_full_documentation(githubLink)
         markdown_doc = generator.convertToMarkdown(documentation.get('message', ''))
-        return markdown_doc, 200, {'Content-Type': 'text/markdown'}
+        return jsonify({"markdown": markdown_doc}), 200
 
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500

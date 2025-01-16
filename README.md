@@ -1,69 +1,49 @@
-HLS Adaptive Bitrate Streaming Documentation
-============================================
-
-Technologies Used
------------------
-
-* FFmpeg: A powerful, open-source multimedia processing tool.
-* Node.js: A JavaScript runtime environment for building scalable and high-performance server-side applications.
-* Express.js: A popular Node.js web framework for building web applications and APIs.
-* HLS (HTTP Live Streaming): A protocol developed by Apple for streaming live and on-demand content over HTTP.
-
-Requirements
-------------
-
-* FFmpeg installed on the system.
-* Node.js and Express.js installed.
-* A video file to be streamed.
-
-Installation Instructions
--------------------------
-
-1. Clone the repository using the following command:
-`git clone (link unavailable)`
-3. Navigate to the project directory:
-`cd HLS-Adaptive_Bitrate_Streaming`
-5. Install the required dependencies:
-`npm install`
-
-Usage Instructions
-------------------
-
-1. Start the server using the following command:
-`node server.js`
-3. Open a web browser and navigate to <http://localhost:3000>.
-4. Select a video file to be streamed.
-5. The video will be streamed using HLS adaptive bitrate streaming.
-
-Documentation
--------------
-
-This project uses FFmpeg to segment the video file into smaller chunks, and then uses Node.js and Express.js to create an HLS manifest file. The manifest file is used to stream the video content using HLS adaptive bitrate streaming.
-
-The project consists of the following components:
-
-* `server.js`: The main server file that creates the HLS manifest file and streams the video content.
-* `ffmpeg.js`: A utility file that uses FFmpeg to segment the video file into smaller chunks.
-* `public/index.html`: The client-side HTML file that plays the streamed video content.
-
-Visuals
--------
-
-![Project Screenshot]((link unavailable))
-
-Project Status
---------------
-
-This project is currently in the development stage. It has been tested with a few video files, but it may not work with all types of video files.
-
-Contribution Guidelines
------------------------
-
-If you would like to contribute to this project, please fork the repository and submit a pull request with your changes. Please make sure to include a detailed description of your changes.
-
-Acknowledgments
----------------
-
-This project would not have been possible without the help of the following people:
-
-* Nilesh D
+# CodeDoc-AI
+Bringing clarity to code with AI-powered documentation.
+## Overview
+CodeDoc-AI is an AI-driven tool designed to automate the generation of comprehensive documentation for your codebase. By leveraging advanced natural language processing models, it analyzes your code and produces clear, concise, and accurate documentation, enhancing code readability and maintainability.
+## Features
+- **Automated Documentation Generation**: Transforms code into human-readable documentation without manual intervention.
+- **Multi-Language Support**: Capable of parsing and documenting code written in various programming languages.
+- **Integration with Development Workflows**: Seamlessly integrates into existing development pipelines to provide real-time documentation updates.
+- **Customizable Output**: Allows customization of documentation style and format to meet specific project requirements.
+## Getting Started
+### Prerequisites
+- Python 3.12 or higher
+- Required Python packages (listed in `requirements.txt` with version specified.)
+### Installation
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/parasmunoli/CodeDoc-AI.git
+   cd CodeDoc-AI
+   ```
+2. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+### Usage
+1. **Prepare Your Codebase**: Ensure your code is organized and accessible for analysis.
+2. **Run CodeDoc-AI**:
+   ```bash
+   python codeParser.py /path/to/your/codebase
+   ```
+3. **View Generated Documentation**: The output will be saved in the specified directory, ready for review and integration.
+## Supported Languages
+- Python
+- Java
+- JavaScript
+- C++
+- Dart
+- R
+- React
+## Contributing
+We welcome contributions from the community. To contribute:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes with clear and descriptive messages.
+4. Push your changes to your forked repository.
+5. Submit a pull request detailing your changes and the motivation behind them.
+## Contact
+For questions, suggestions, or feedback, please open an issue on GitHub or contact me at [parasmunoli@gmail.com]().
+---
+*Note: This project is under active development. Features and functionalities are subject to change.*

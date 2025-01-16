@@ -26,7 +26,7 @@ def generateDocumentation():
         return jsonify({"markdown": markdown_doc}), 200
 
     except Exception as e:
-        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+        return jsonify({"error": f"An error occurred: Model unable to produce valid output"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

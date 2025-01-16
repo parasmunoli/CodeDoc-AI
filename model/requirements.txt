@@ -1,0 +1,5 @@
+markdownify
+meta-ai-api
+requests
+flask
+flask-cors

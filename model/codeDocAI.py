@@ -22,6 +22,7 @@ def generateDocumentation():
         generator = CodeDocumentationGenerator()
         documentation = generator.generate_full_documentation(githubLink)
         markdown_doc = generator.convertToMarkdown(documentation.get('message', ''))
+        # print(markdown_doc)
         return jsonify({"markdown": markdown_doc}), 200
 
     except Exception as e:

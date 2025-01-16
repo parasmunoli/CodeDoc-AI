@@ -6,52 +6,85 @@ from meta_ai_api import MetaAI
 
 
 class CodeDocumentationGenerator:
-    def __init__(self, features):
-        self.features = features
+    def __init__(self):
+        # self.features = features
         print("Initializing MetaAI text generator...")
         self.text_generator = MetaAI()
         print("MetaAI text generator initialized successfully!")
 
-    def generate_text(self, prompt):
-        """Generate text using MetaAI text generator."""
-        return self.text_generator.prompt(prompt)
-
-    def generate_full_documentation(self):
+    def generate_full_documentation(self, link):
         """Generate full documentation using features."""
         prompt = (
-            f"Generate a detailed elaborated description for code with the following features: {self.features}. "
-            "output in html format Include sections for overview, variables, functions, and classes, and provide in-depth explanations and also add Conclusion of the code at last and response only in HTML format ."
+            f"""{link}, visit the GitHub repository and create a detailed documentation that includes:
+Project Overview
+Provide a brief overview of the project, including its purpose, goals, and objectives.
+Technologies Used
+Read the code files and identify the technologies used in the project. Provide a detailed list of the programming languages, frameworks, libraries, and tools used.
+Requirements
+Read the code files and describe the requirements for the project. Provide a detailed list of the hardware and software requirements, including the operating system, processor, memory, and storage requirements.
+Installation Instructions
+Read the and analyze all the code and Provide detailed installation instructions for the project. Include the following steps:
+Clone the repository using the command
+Navigate to the project directory using the command
+Install the required dependencies using the command
+Configure the project settings as needed
+Usage Instructions
+Provide detailed usage instructions for the project. Include the following steps:
+Prepare the input video file
+Configure the project settings as needed
+Read code and run the project using the command
+Monitor the project output and adjust the settings as needed
+Documentation
+Explain the functionality of the project in an elaborated and detailed manner. Include the following sections:
+Project Status
+Describe the current status of the project, including:
+Development Stage
+Testing Stage
+Deployment Stage
+Contribution Guidelines
+Provide guidelines for contributors, including:
+Code Style Guidelines
+Commit Message Guidelines
+Issue Reporting Guidelines
+Acknowledgments
+Provide acknowledgments for contributors, including:
+List of Contributors
+Contributions Made
+Conclusion
+Conclude the project with a summary, including:
+Project Overview
+Key Features
+Future Development Plans
+Return the response in HTML format only. Ensure the response is detailed and comprehensive, covering all the sections listed explicitly."""
         )
-        response = self.generate_text(prompt)
-        # markdownContent = self.text_generator.prompt(f"Arrange in markdown format: {response}")
-        # print(markdownContent)
+        response = self.text_generator.prompt(prompt)
+        print(response)
         return response
 
     def convertToMarkdown(self, text):
         markdownCode = markdownify(text)
-        print("Markdown Code: ", markdownCode)
         return markdownCode
 
 
 # Example Usage
-if __name__ == "__main__":
-    import json
-
-    with open("updatedSampleAnalysis.json", "r") as file:
-        sample_features = json.load(file)
-
-    print("Generating documentation...")
-    generator = CodeDocumentationGenerator(sample_features)
-    print("Documentation generator initialized successfully!")
-    documentation = generator.generate_full_documentation()
-    print("Documentation generated successfully!")
-    print("Documentation:",documentation.get('message', ''))
-    print("Converting to markdown...")
-    documentation = generator.convertToMarkdown(documentation.get('message', ''))
-    print("Documentation converted to markdown successfully!")
-
-    #
-    # with open("codeDocumentation.md", "w") as file:
-    #     file.write(documentation)
+# if __name__ == "__main__":
+#     import json
+#
+#     with open("updatedSampleAnalysis.json", "r") as file:
+#         sample_features = json.load(file)
+#
+#     print("Generating documentation...")
+#     generator = CodeDocumentationGenerator(sample_features)
+#     print("Documentation generator initialized successfully!")
+#     documentation = generator.generate_full_documentation()
+#     print("Documentation generated successfully!")
+#     print("Documentation:",documentation.get('message', ''))
+#     print("Converting to markdown...")
+#     documentation = generator.convertToMarkdown(documentation.get('message', ''))
+#     print("Documentation converted to markdown successfully!")
+#
+#     #
+#     # with open("codeDocumentation.md", "w") as file:
+#     #     file.write(documentation)
 
     print("Documentation saved as codeDocumentation.md!")

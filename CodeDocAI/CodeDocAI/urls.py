@@ -14,8 +14,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.contrib.auth import views as auth_views
 from django.urls import path
 from mainApp import views
 
@@ -23,5 +21,7 @@ app_name = 'CodeDocAI'
 
 urlpatterns = [
     path('status/', views.status, name='status'),
-    path('', views.home, name='home')
+    path('', views.home, name='home'),
+    path('addUser/', views.addUser, name='addUser'),
+    path('getAllUsers/', views.getAllUsers, name='getAllUsers')
 ]

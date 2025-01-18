@@ -4,3 +4,4 @@ __pycache__
 /.idea
 /CodeDocAI/CodeDocAI/.env
 /CodeDocAI/db.sqlite3
+/CodeDocAI/.env

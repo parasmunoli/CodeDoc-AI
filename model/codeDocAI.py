@@ -21,12 +21,12 @@ def generateDocumentation():
         githubLink = request.json['githubLink']
         generator = CodeDocumentationGenerator()
         documentation = generator.generate_full_documentation(githubLink)
-        markdown_doc = generator.convertToMarkdown(documentation.get('message', ''))
-        # print(markdown_doc)
-        return jsonify({"markdown": markdown_doc}), 200
-
+        print(documentation)
     except Exception as e:
-        return jsonify({"error": f"An error occurred: Model unable to produce valid output"}), 500
+        return jsonify({"error": str(e)}), 500
+
+    return jsonify({"markdown": documentation}), 200
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

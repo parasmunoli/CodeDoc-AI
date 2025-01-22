@@ -1,10 +1,6 @@
 from click import prompt
 from markdownify import markdownify
 from meta_ai_api import MetaAI
-from transformers import T5ForConditionalGeneration, T5Tokenizer
-
-# from transformers import MarkupLMFeatureExtractor, MarkupLMTokenizerFast, MarkupLMProcessor
-
 
 class CodeDocumentationGenerator:
     def __init__(self):
@@ -108,7 +104,8 @@ class CodeDocumentationGenerator:
         print("Text converted to Markdown successfully!")
         return elaborated_text
 
-if __name__ == "__main__":
-    generator = CodeDocumentationGenerator()
-    documentation = generator.generate_full_documentation("https://github.com/NILESHD2003/HLS-Adaptive_Bitrate_Streaming")
-    print("HTML Doc: ",documentation)
+# Uncomment to try and test the code
+# if __name__ == "__main__":
+#     generator = CodeDocumentationGenerator()
+#     documentation = generator.generate_full_documentation("<Github Link>")
+#     print("HTML Doc: ",documentation)

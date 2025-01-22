@@ -1,6 +1,7 @@
 from click import prompt
 from markdownify import markdownify
 from meta_ai_api import MetaAI
+from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 class CodeDocumentationGenerator:
     def __init__(self):
